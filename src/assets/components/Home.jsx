@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import Banner from './Banner';
 import Movies from './Movies';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import paginationSlice from '../../redux/paginationSlice';
+import { useSelector, useDispatch} from 'react-redux'
 
+
+const actions = paginationSlice.actions;
 function Home() {
-    const [pageNo, setPageNo] = useState(1);
-
+    const {pageNo} = useSelector((state)=>state.paginationState);
+      const dispatch = useDispatch();
     const handlePrev = () => {
-        if (pageNo === 1) return;
-        setPageNo(pageNo - 1);
+       dispatch(actions.handlePrev());
     };
 
     const handleNext = () => {
-        setPageNo(pageNo + 1);
+         dispatch(actions.handleNext());
     };
 
     return (
